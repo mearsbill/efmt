@@ -4,8 +4,35 @@ import (
 	"testing"
 )
 
+// go test -v
+// === RUN   TestFloat2Str
+// === RUN   TestFloat2Str/No_prefix
+// === RUN   TestFloat2Str/High_Edge
+// === RUN   TestFloat2Str/Mega_Test
+// === RUN   TestFloat2Str/nano_Test
+// === RUN   TestFloat2Str/giga_Test
+// === RUN   TestFloat2Str/yotta_Test
+// === RUN   TestFloat2Str/yocto_Test
+// --- PASS: TestFloat2Str (0.00s)
+//     --- PASS: TestFloat2Str/No_prefix (0.00s)
+//     --- PASS: TestFloat2Str/High_Edge (0.00s)
+//     --- PASS: TestFloat2Str/Mega_Test (0.00s)
+//     --- PASS: TestFloat2Str/nano_Test (0.00s)
+//     --- PASS: TestFloat2Str/giga_Test (0.00s)
+//     --- PASS: TestFloat2Str/yotta_Test (0.00s)
+//     --- PASS: TestFloat2Str/yocto_Test (0.00s)
+// === RUN   TestInt2Str
+// === RUN   TestInt2Str/No_prefix
+// === RUN   TestInt2Str/K_prefix
+// === RUN   TestInt2Str/K.2_prefix
+// --- PASS: TestInt2Str (0.00s)
+//     --- PASS: TestInt2Str/No_prefix (0.00s)
+//     --- PASS: TestInt2Str/K_prefix (0.00s)
+//     --- PASS: TestInt2Str/K.2_prefix (0.00s)
+// PASS
+// ok  	efmt	0.007s
 
-// Baseline testing
+// go test -v.   Runs all tests beginning modules beginning with "Test"
 func TestFloat2Str(t *testing.T) {
     if testing.Short() {
         t.Skip("skipping test in short mode.")
@@ -48,9 +75,9 @@ func TestInt2Str(t *testing.T) {
         mega    bool
         want string
     }{
-        {"No prefix", 987, "3.0","Sec",false,"987 Sec "},
-        {"K prefix", 9870, "3.0","Sec",false," 10 KSec"},
-        {"K.2 prefix", 98700, "5.2","Sec",false,"98.70 KSec"},
+        {"No prefix Test", 987, "3.0","Sec",false,"987 Sec "},
+        {"K.0 Test", 9870, "3.0","Sec",false," 10 KSec"},
+        {"K.2 Test", 98700, "5.2","Sec",false,"98.70 KSec"},
 
     }
     for _, tt := range tests {
@@ -64,6 +91,9 @@ func TestInt2Str(t *testing.T) {
 
 }
 
+// two different Benchmarks to test different number of decimal points.
+// go test -bench=Float2Str1 -benchtime=5s
+//go test -bench=Float2Str2 -benchtime=5s
 func BenchmarkFloat2Str1(b *testing.B) {
     b.ResetTimer()
     for i := 0; i < b.N; i++ {
@@ -76,6 +106,8 @@ func BenchmarkFloat2Str2(b *testing.B) {
         Float2Str(201000000.0,"6.2","Units",false)
     }
 }
+
+// actual benchmark code does not showup in benchmark suite
 
 func benchmarkFloat2Str(val float64, b *testing.B) {
     b.ResetTimer()
