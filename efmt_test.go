@@ -6,9 +6,9 @@ import (
 
 // go test -v.   Runs all tests beginning modules beginning with "Test"
 func TestFloat2Str(t *testing.T) {
-	if testing.Short() {
-		t.Skip("skipping test in short mode.")
-	}
+	// if testing.Short() {
+	// 	t.Skip("skipping test in short mode.")
+	// }
 	tests := []struct {
 		name  string
 		x     float64
@@ -35,9 +35,9 @@ func TestFloat2Str(t *testing.T) {
 
 }
 func TestInt2Str(t *testing.T) {
-	if testing.Short() {
-		t.Skip("skipping test in short mode.")
-	}
+	// if testing.Short() {
+	// 	t.Skip("skipping test in short mode.")
+	// }
 	tests := []struct {
 		name  string
 		x     int64

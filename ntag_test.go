@@ -6,9 +6,9 @@ import (
 
 // go test -v.   Runs all tests beginning modules beginning with "Test"
 func TestNtag(t *testing.T) {
-	if testing.Short() {
-		t.Skip("skipping test in short mode.")
-	}
+	// if testing.Short() {
+	// 	t.Skip("skipping test in short mode.")
+	// }
 
 	var nt *Ntag
 	tests := []struct {
